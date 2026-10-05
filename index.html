@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>سایت من</title>
+
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial;
+            background-color: lightblue;
+        }
+
+        h1 {
+            color: darkblue;
+        }
+        #qrcode {
+    margin-top: 20px;
+}
+
+#qrcode img {
+    border: 5px solid white;
+    padding: 5px;
+    border-radius: 10px;
+}
+nav {
+    margin-bottom: 30px;
+}
+
+nav a {
+    margin: 10px;
+    text-decoration: none;
+    color: darkblue;
+    font-weight: bold;
+}
+button {
+    background-color: darkblue;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: blue;
+}
+
+input {
+    padding: 10px;
+    width: 250px;
+    border-radius: 8px;
+    border: 1px solid gray;
+}
+@media (max-width: 600px) {
+    input {
+        width: 80%;
+    }
+
+    button {
+        width: 80%;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+}
+footer {
+    margin-top: 50px;
+    padding: 20px;
+    background-color: darkblue;
+    color: white;
+}
+body {
+    margin: 0;
+    background: linear-gradient(to right, lightblue, white);
+}
+
+h1 {
+    margin-top: 40px;
+}
+#qrcode {
+    background-color: white;
+    display: inline-block;
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+    </style>
+</head>
+
+<body>
+<nav>
+    <a href="#">خانه</a>
+    <a href="#qrcode">ساخت QR Code</a>
+</nav>
+    <h1>QR Code ساز من 🚀</h1>    
+    <p>به سایت من خوش آمدید.</p>
+    <img src="https://via.placeholder.com/300" alt="تصویر سایت">
+    <section>
+    <h2>درباره سایت</h2>
+    <p>اینجا می‌توانی لینک خودت را وارد کنی و QR Code بسازی.</p>
+</section>
+    <button onclick="alert('سلام!')">کلیک کن</button>
+    <h2>ساخت QR Code</h2>
+
+<input id="link" type="text" placeholder="لینک را وارد کن">
+<button onclick="makeQR()">ساخت QR</button>
+<button onclick="clearQR()">پاک کردن</button>
+<button onclick="copyLink()">کپی لینک</button>
+<button onclick="downloadQR()">دانلود QR</button>
+<div id="qrcode"></div>
+<script>
+function copyLink() {
+    let link = document.getElementById("link").value;
+
+    if (link == "") {
+        alert("اول یک لینک وارد کن");
+        return;
+    }
+
+    navigator.clipboard.writeText(link);
+    alert("لینک کپی شد!");
+}
+function downloadQR() {
+    let img = document.querySelector("#qrcode img");
+
+    if (!img) {
+        alert("اول یک QR Code بساز");
+        return;
+    }
+
+    let link = document.createElement("a");
+    link.href = img.src;
+    link.download = "qrcode.png";
+    link.click();
+}
+function makeQR() {
+    let link = document.getElementById("link").value;
+
+    if (link == "") {
+        alert("لطفاً یک لینک وارد کن");
+        return;
+    }
+
+    document.getElementById("qrcode").innerHTML =
+        "<img src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data="
+        + encodeURIComponent(link) + "'>";
+}
+</script>
+<footer>
+    <p>© 2026 سایت من</p>
+</footer>
+</body>
+</html>
